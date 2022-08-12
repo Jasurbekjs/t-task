@@ -87,10 +87,13 @@ export default {
     //   this.togglePopup = false;
     // },
     sendForm(){
-      this.form.phone = this.form.phone.replace(/[^0-9,\s]/g,"");
-      this.form.phone = this.form.phone.trim();
       this.axios.post('http://hh.autodrive-agency.ru/test-tasks/front/task-7',
-        this.form
+        {
+          name: this.form.name,
+          phone: this.form.phone.replace(/[{()},-\s]/g, ''),
+          email: this.form.email,
+          city_id: this.form.city_id
+        }
       ).then(res=>{
         this.$store.commit('UNSET_FORM');
         this.togglePopup = flase;
